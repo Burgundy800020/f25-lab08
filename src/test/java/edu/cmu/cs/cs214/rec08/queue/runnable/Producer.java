@@ -2,6 +2,8 @@ package edu.cmu.cs.cs214.rec08.queue.runnable;
 
 import edu.cmu.cs.cs214.rec08.queue.SimpleQueue;
 
+//Routine that enqueues from 0 to n-1
+// (Creates resource)
 public class Producer implements Runnable {
 
 	private SimpleQueue<Integer> q;

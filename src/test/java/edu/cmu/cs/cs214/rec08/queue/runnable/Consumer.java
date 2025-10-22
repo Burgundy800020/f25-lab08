@@ -2,6 +2,8 @@ package edu.cmu.cs.cs214.rec08.queue.runnable;
 
 import edu.cmu.cs.cs214.rec08.queue.SimpleQueue;
 
+//Routine that dequeues n items
+// (Consumes resource)
 public class Consumer implements Runnable {
 
 	private SimpleQueue<Integer> q;

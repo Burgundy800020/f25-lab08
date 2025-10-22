@@ -2,6 +2,9 @@ package edu.cmu.cs.cs214.rec08.queue.runnable;
 
 import edu.cmu.cs.cs214.rec08.queue.SimpleQueue;
 
+//Dequeues n times
+//Busy waits 1e6 steps for the queue to be non-empty
+//If no item is available after that, stops consuming
 public class SpinWaitConsumer implements Runnable {
 
 	private SimpleQueue<Integer> q;

@@ -48,6 +48,7 @@ public class SimpleQueueTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        assertEquals(2*SIZE, q.size(), "SimpleQueue size should have two copies of each item");
     }
 
     @Test

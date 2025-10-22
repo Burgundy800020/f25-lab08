@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 /**
@@ -56,16 +57,17 @@ public class SimpleHashMap<K, V> {
             throw new NullPointerException("Key can't be null.");
 
         List<Entry<K,V>> bucket = table.get(hash(key));
-        for (Entry<K, V> e : bucket) {
-            if (e.key.equals(key)) {
-                V result = e.value;
-                e.value = value;
-                return result;
+        synchronized (bucket) {
+            for (Entry<K, V> e : bucket) {
+                if (e.key.equals(key)) {
+                    V result = e.value;
+                    e.value = value;
+                    return result;
+                }
             }
+            bucket.add(new Entry<>(key, value));
+            return null;
         }
-
-        bucket.add(new Entry<>(key, value));
-        return null;
     }
 
     /**
@@ -76,12 +78,14 @@ public class SimpleHashMap<K, V> {
      */
     public V get(K key) {
         List<Entry<K,V>> bucket = table.get(hash(key));
-        for (Entry<K, V> e : bucket) {
-            if (e.key.equals(key)) {
-                return e.value;
+        synchronized (bucket) {
+            for (Entry<K, V> e : bucket) {
+                if (e.key.equals(key)) {
+                    return e.value;
+                }
             }
+            return null;
         }
-        return null;
     }
 
     /**

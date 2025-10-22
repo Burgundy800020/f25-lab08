@@ -14,7 +14,6 @@ public class Consumer implements Runnable {
 		this.n = n;
 	}
 
-
 	@Override
 	public void run() {
 		while(n > 0) {
